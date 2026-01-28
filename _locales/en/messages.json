@@ -1,0 +1,38 @@
+{
+  "appName": {
+    "message": "ReplyFirst"
+  },
+  "appShortName": {
+    "message": "ReplyFirst"
+  },
+  "appDescription": {
+    "message": "Reverse Gmail conversation order to show newest messages first"
+  },
+  "browserActionTitle": {
+    "message": "ReplyFirst"
+  },
+  "msg_1": {
+    "message": "How to Use"
+  },
+  "msg_2": {
+    "message": "Enable reverse order using the toggle above"
+  },
+  "msg_3": {
+    "message": "Open or refresh your Gmail tab"
+  },
+  "msg_4": {
+    "message": "Ensure Conversation View is enabled in Gmail Settings → General"
+  },
+  "msg_5": {
+    "message": "Enjoy!"
+  },
+  "msg_6": {
+    "message": "Reverse conversation order"
+  },
+  "msg_7": {
+    "message": "Reload your Gmail page to ensure the extension takes effect."
+  },
+  "msg_14": {
+    "message": "Settings saved"
+  }
+}

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ReplyFirst Icon Preview</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: 40px;
+            background: #f5f5f5;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .icon-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .icon-card h3 {
+            margin: 0 0 20px 0;
+            color: #667eea;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .icon-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 15px;
+            min-height: 80px;
+        }
+        .icon-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .icon-bg {
+            padding: 15px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        .light-bg {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+        }
+        .dark-bg {
+            background: #2d2d2d;
+            border: 1px solid #404040;
+        }
+        .icon-label {
+            font-size: 11px;
+            color: #6c757d;
+            font-weight: 500;
+        }
+        .size-info {
+            color: #6c757d;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        .design-notes {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-top: 30px;
+        }
+        .design-notes h2 {
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        .design-notes ul {
+            color: #495057;
+            line-height: 1.8;
+        }
+        .design-notes code {
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Monaco', monospace;
+            font-size: 12px;
+            color: #667eea;
+        }
+        .color-swatch {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            vertical-align: middle;
+            margin-right: 8px;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>ReplyFirst - New Icon Design</h1>
+
+    <div class="preview-grid">
+        <!-- 16px Icon -->
+        <div class="icon-card">
+            <h3>16×16px (Smallest)</h3>
+            <div class="icon-display">
+                <div class="icon-wrapper">
+                    <div class="icon-bg light-bg">
+                        <img src="images/icon-16.png" alt="16px icon" width="16" height="16">
+                    </div>
+                    <span class="icon-label">Light Theme</span>
+                </div>
+                <div class="icon-wrapper">
+                    <div class="icon-bg dark-bg">
+                        <img src="images/icon-16.png" alt="16px icon" width="16" height="16">
+                    </div>
+                    <span class="icon-label">Dark Theme</span>
+                </div>
+            </div>
+            <div class="size-info">Inactive state only</div>
+        </div>
+
+        <!-- 19px Icons -->
+        <div class="icon-card">
+            <h3>19×19px (Toolbar)</h3>
+            <div class="icon-display">
+                <div class="icon-wrapper">
+                    <div class="icon-bg light-bg">
+                        <img src="images/icon-19.png" alt="19px inactive" width="19" height="19">
+                    </div>
+                    <span class="icon-label">Inactive</span>
+                </div>
+                <div class="icon-wrapper">
+                    <div class="icon-bg light-bg">
+                        <img src="images/icon-19-on.png" alt="19px active" width="19" height="19">
+                    </div>
+                    <span class="icon-label">Active</span>
+                </div>
+            </div>
+            <div class="size-info">Standard resolution toolbar icon</div>
+        </div>
+
+        <!-- 38px Icons -->
+        <div class="icon-card">
+            <h3>38×38px (Toolbar @2x)</h3>
+            <div class="icon-display">
+                <div class="icon-wrapper">
+                    <div class="icon-bg light-bg">
+                        <img src="images/icon-38.png" alt="38px inactive" width="38" height="38">
+                    </div>
+                    <span class="icon-label">Inactive</span>
+                </div>
+                <div class="icon-wrapper">
+                    <div class="icon-bg light-bg">
+                        <img src="images/icon-38-on.png" alt="38px active" width="38" height="38">
+                    </div>
+                    <span class="icon-label">Active</span>
+                </div>
+            </div>
+            <div class="size-info">Retina display toolbar icon</div>
+        </div>
+
+        <!-- 128px Icon -->
+        <div class="icon-card">
+            <h3>128×128px (Extension Store)</h3>
+            <div class="icon-display">
+                <div class="icon-wrapper">
+                    <div class="icon-bg light-bg">
+                        <img src="images/icon-128.png" alt="128px icon" width="128" height="128">
+                    </div>
+                    <span class="icon-label">Main Icon</span>
+                </div>
+            </div>
+            <div class="size-info">Chrome Web Store & Extension Management</div>
+        </div>
+    </div>
+
+    <div class="design-notes">
+        <h2>Design Notes</h2>
+        <ul>
+            <li><strong>Concept:</strong> Three horizontal bars represent email threads in a conversation. The upward arrow indicates that newest messages appear first (reversed order).</li>
+            <li><strong>Colors:</strong>
+                <div style="margin-top: 10px;">
+                    <span class="color-swatch" style="background: #9CA3AF;"></span> Inactive: <code>#9CA3AF</code> (Gray)<br>
+                    <span class="color-swatch" style="background: linear-gradient(135deg, #8B5CF6, #7C3AED);"></span> Active: <code>#8B5CF6 → #7C3AED</code> (Purple gradient)
+                </div>
+            </li>
+            <li><strong>Visual Hierarchy:</strong> The bars are evenly spaced to represent email threads, with the arrow providing clear directional context.</li>
+            <li><strong>Scalability:</strong> The design works at all sizes (16px-128px) with appropriate scaling adjustments for each size.</li>
+            <li><strong>Accessibility:</strong> Works in both light and dark themes. The icon is recognizable even in monochrome.</li>
+            <li><strong>Brand Alignment:</strong> Purple gradient matches the popup UI (<code>#667eea → #764ba2</code> theme).</li>
+        </ul>
+    </div>
+
+</body>
+</html>

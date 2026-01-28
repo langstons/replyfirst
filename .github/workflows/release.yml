@@ -1,0 +1,211 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number (e.g., 1.0.0)'
+        required: true
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Verify prerequisites
+        run: |
+          echo "Checking self-hosted runner prerequisites..."
+          command -v node >/dev/null 2>&1 || { echo "Node.js is required but not installed."; exit 1; }
+          command -v jq >/dev/null 2>&1 || { echo "jq is required but not installed."; exit 1; }
+          command -v openssl >/dev/null 2>&1 || { echo "openssl is required but not installed."; exit 1; }
+          command -v zip >/dev/null 2>&1 || { echo "zip is required but not installed."; exit 1; }
+          echo "Node.js: $(node --version)"
+          echo "jq: $(jq --version)"
+          echo "All prerequisites satisfied"
+
+      - name: Get version from tag or input
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+          else
+            # Extract version from tag (remove 'v' prefix)
+            echo "version=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Update manifest version
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          jq --arg v "$VERSION" '.version = $v' manifest.json > manifest.tmp && mv manifest.tmp manifest.json
+          cat manifest.json | grep version
+
+      - name: Create ZIP file (Chrome Web Store version)
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          zip -r "replyfirst-${VERSION}.zip" \
+            manifest.json \
+            images/ \
+            pages/ \
+            scripts/ \
+            styles/ \
+            _locales/ \
+            -x "*.DS_Store" \
+            -x "generate_icons.py" \
+            -x "icon_preview.html" \
+            -x "ICON_DESIGN_SPECS.md"
+          ls -la *.zip
+
+      - name: Check for CRX secret
+        id: check_secret
+        run: |
+          if [ -n "${{ secrets.CRX_PRIVATE_KEY }}" ]; then
+            echo "has_key=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_key=false" >> $GITHUB_OUTPUT
+            echo "WARNING: CRX_PRIVATE_KEY secret not found. Skipping CRX build."
+          fi
+
+      - name: Install CRX tools
+        if: steps.check_secret.outputs.has_key == 'true'
+        run: |
+          if ! command -v crx >/dev/null 2>&1; then
+            npm install -g crx
+          fi
+
+      - name: Create CRX file and get Extension ID
+        id: crx
+        if: steps.check_secret.outputs.has_key == 'true'
+        env:
+          CRX_PRIVATE_KEY: ${{ secrets.CRX_PRIVATE_KEY }}
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+
+          # Write the private key from secret
+          echo "$CRX_PRIVATE_KEY" > replyfirst.pem
+
+          # Extract public key and compute extension ID
+          # Extension ID is first 32 chars of SHA256 of public key, with a-p alphabet
+          EXTENSION_ID=$(openssl rsa -in replyfirst.pem -pubout -outform DER 2>/dev/null | \
+            openssl dgst -sha256 -binary | \
+            head -c 16 | \
+            xxd -p | \
+            sed 's/./\n&/g' | \
+            tail -n +2 | \
+            while read -r char; do
+              dec=$((16#$char))
+              printf "\\$(printf '%03o' $((dec + 97)))"
+            done)
+
+          echo "Extension ID: $EXTENSION_ID"
+          echo "extension_id=$EXTENSION_ID" >> $GITHUB_OUTPUT
+
+          # Create a temporary directory with extension files
+          mkdir -p extension
+          cp manifest.json extension/
+          cp -r images pages scripts styles _locales extension/
+
+          # Add update_url to manifest for CRX auto-updates (not allowed in Chrome Web Store ZIP)
+          jq '. + {"update_url": "https://langstons.github.io/replyfirst/updates.xml"}' extension/manifest.json > extension/manifest.tmp && mv extension/manifest.tmp extension/manifest.json
+
+          # Create CRX
+          crx pack extension -p replyfirst.pem -o "replyfirst-${VERSION}.crx"
+
+          # Clean up private key and temp directory
+          rm -f replyfirst.pem
+          rm -rf extension
+
+          ls -la *.crx
+
+      - name: Update updates.xml
+        if: steps.check_secret.outputs.has_key == 'true'
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          EXTENSION_ID="${{ steps.crx.outputs.extension_id }}"
+          CRX_URL="https://github.com/langstons/replyfirst/releases/download/v${VERSION}/replyfirst-${VERSION}.crx"
+
+          cat > updates.xml << EOF
+          <?xml version='1.0' encoding='UTF-8'?>
+          <gupdate xmlns='http://www.google.com/update2/response' protocol='2.0'>
+            <app appid='${EXTENSION_ID}'>
+              <updatecheck codebase='${CRX_URL}' version='${VERSION}' />
+            </app>
+          </gupdate>
+          EOF
+
+          echo "Updated updates.xml:"
+          cat updates.xml
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: ReplyFirst v${{ steps.version.outputs.version }}
+          tag_name: ${{ github.event_name == 'workflow_dispatch' && format('v{0}', steps.version.outputs.version) || github.ref_name }}
+          draft: false
+          prerelease: false
+          files: |
+            replyfirst-*.zip
+            replyfirst-*.crx
+          fail_on_unmatched_files: false
+          body: |
+            ## ReplyFirst v${{ steps.version.outputs.version }}
+
+            Chrome extension that reverses Gmail conversation thread order to show the newest messages first.
+
+            ### Installation
+
+            **Chrome Web Store** (recommended):
+            - Install from the Chrome Web Store for automatic updates
+
+            **Manual Installation (Developer Mode)**:
+            1. Download `replyfirst-${{ steps.version.outputs.version }}.zip`
+            2. Extract the ZIP file
+            3. Go to `chrome://extensions`
+            4. Enable "Developer mode"
+            5. Click "Load unpacked" and select the extracted folder
+
+            **Enterprise Deployment (CRX with Auto-Update)**:
+            - Deploy `replyfirst-${{ steps.version.outputs.version }}.crx` via enterprise policy
+            - Auto-updates via: `https://langstons.github.io/replyfirst/updates.xml`
+            ${{ steps.check_secret.outputs.has_key == 'true' && format('- Extension ID: `{0}`', steps.crx.outputs.extension_id) || '' }}
+
+            ### What's New
+
+            See [CHANGELOG.md](https://github.com/langstons/replyfirst/blob/main/CHANGELOG.md) for detailed changes.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Prepare GitHub Pages
+        if: steps.check_secret.outputs.has_key == 'true'
+        run: |
+          mkdir -p _site
+          cp updates.xml _site/
+
+      - name: Upload Pages artifact
+        if: steps.check_secret.outputs.has_key == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy-pages:
+    needs: build
+    runs-on: self-hosted
+    if: needs.build.outputs.has_key == 'true'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

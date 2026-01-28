@@ -1,0 +1,27 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Build files
+dist/
+build/
+*.zip
+
+# Node modules (if needed later)
+node_modules/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Extension packaging
+*.crx
+*.pem
