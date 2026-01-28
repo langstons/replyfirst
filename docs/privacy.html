@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - ReplyFirst</title>
+    <meta name="description" content="ReplyFirst Privacy Policy - Zero data collection, complete privacy protection">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="ReplyFirst Privacy Policy">
+    <meta property="og:description" content="Zero data collection, complete privacy protection">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://privatelinkio.github.io/replyfirst/privacy.html">
+
+    <style>
+        :root {
+            --purple-primary: #7C3AED;
+            --purple-dark: #5B21B6;
+            --purple-light: #A78BFA;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--gray-800);
+            background: var(--gray-50);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--purple-primary), var(--purple-dark));
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+
+        /* Content */
+        .content {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .content h2 {
+            color: var(--purple-dark);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.75rem;
+        }
+
+        .content h2:first-child {
+            margin-top: 0;
+        }
+
+        .content h3 {
+            color: var(--purple-primary);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+        }
+
+        .content p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .content ul {
+            margin: 1rem 0 1rem 2rem;
+            line-height: 1.8;
+        }
+
+        .content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(91, 33, 182, 0.1));
+            border-left: 4px solid var(--purple-primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .highlight-box h3 {
+            margin-top: 0;
+            color: var(--purple-dark);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--gray-800);
+            border-top: 1px solid var(--gray-100);
+        }
+
+        .footer a {
+            color: var(--purple-primary);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Back link */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--purple-primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .content {
+                padding: 1.5rem;
+            }
+
+            .content h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Privacy Policy</h1>
+        <p>ReplyFirst - Complete transparency about your data</p>
+    </header>
+
+    <div class="container">
+        <a href="/" class="back-link">← Back to Home</a>
+
+        <div class="content">
+            <div class="highlight-box">
+                <h3>🔒 Our Privacy Commitment</h3>
+                <p><strong>ReplyFirst collects ZERO data.</strong> We believe privacy is a fundamental right, not a feature. This extension operates entirely locally in your browser with no external connections.</p>
+            </div>
+
+            <h2>What Data We Collect</h2>
+            <p><strong>None.</strong> ReplyFirst does not collect, store, track, or transmit any user data whatsoever.</p>
+
+            <h2>How the Extension Works</h2>
+            <p>ReplyFirst uses a simple CSS injection technique to reverse the visual order of Gmail conversation threads. Here's exactly what happens:</p>
+
+            <ul>
+                <li><strong>Local Storage:</strong> Your enable/disable preference is stored locally in your browser using Chrome's storage API. This data never leaves your device.</li>
+                <li><strong>CSS Injection:</strong> When enabled, the extension injects CSS styling into Gmail pages to reverse the display order using flexbox.</li>
+                <li><strong>No Reading:</strong> The extension does not read, access, or process any email content.</li>
+                <li><strong>No Transmission:</strong> Zero network requests are made by this extension.</li>
+            </ul>
+
+            <h2>Permissions Explanation</h2>
+
+            <h3>Storage Permission</h3>
+            <p>Used exclusively to save your enable/disable preference locally on your device. No data is synchronized or transmitted.</p>
+
+            <h3>Host Permission (https://mail.google.com/*)</h3>
+            <p>Required to inject CSS styling into Gmail pages. The extension only runs on Gmail and does not access any other websites.</p>
+
+            <h2>Third-Party Services</h2>
+            <p>ReplyFirst does not use any third-party services, analytics, tracking, or external libraries. The extension is completely self-contained.</p>
+
+            <h2>Data Security</h2>
+            <p>Since we don't collect any data, there is no data to secure, breach, or compromise. Your email content remains entirely within Gmail's infrastructure and is never touched by ReplyFirst.</p>
+
+            <h2>Open Source Transparency</h2>
+            <p>ReplyFirst is open source. You can review the complete source code to verify our privacy claims:</p>
+            <p><a href="https://github.com/privatelinkio/replyfirst" target="_blank" rel="noopener">https://github.com/privatelinkio/replyfirst</a></p>
+
+            <h2>Changes to This Policy</h2>
+            <p>If we ever change how the extension handles data (spoiler: we won't), we will update this policy and the extension version. However, our commitment to zero data collection is fundamental to ReplyFirst's design.</p>
+
+            <h2>Contact</h2>
+            <p>For questions about this privacy policy, please open an issue on our GitHub repository:</p>
+            <p><a href="https://github.com/privatelinkio/replyfirst/issues" target="_blank" rel="noopener">https://github.com/privatelinkio/replyfirst/issues</a></p>
+
+            <div class="highlight-box">
+                <h3>✨ Privacy by Design</h3>
+                <p>ReplyFirst was built with privacy as the foundation, not an afterthought. We can't misuse your data because we never have access to it in the first place.</p>
+            </div>
+
+            <p style="margin-top: 2rem; font-size: 0.9rem; color: #6B7280;">
+                <strong>Last Updated:</strong> January 28, 2026<br>
+                <strong>Extension Version:</strong> 1.0.2
+            </p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2026 <a href="https://github.com/privatelinkio">privatelinkio</a> | <a href="/">ReplyFirst</a> | <a href="https://github.com/privatelinkio/replyfirst">Open Source</a></p>
+    </footer>
+</body>
+</html>
