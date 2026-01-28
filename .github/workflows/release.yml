@@ -151,7 +151,12 @@ jobs:
           cp -r images pages scripts styles _locales extension/
 
           # Add update_url to manifest for CRX auto-updates (not allowed in Chrome Web Store ZIP)
-          jq '. + {"update_url": "https://langstons.github.io/replyfirst/updates.xml"}' extension/manifest.json > extension/manifest.tmp && mv extension/manifest.tmp extension/manifest.json
+          if command -v /opt/homebrew/bin/jq >/dev/null 2>&1; then
+            JQ_CMD=/opt/homebrew/bin/jq
+          else
+            JQ_CMD=jq
+          fi
+          $JQ_CMD '. + {"update_url": "https://langstons.github.io/replyfirst/updates.xml"}' extension/manifest.json > extension/manifest.tmp && mv extension/manifest.tmp extension/manifest.json
 
           # Create CRX
           crx pack extension -p replyfirst.pem -o "replyfirst-${VERSION}.crx"
