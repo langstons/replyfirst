@@ -36,32 +36,49 @@ jobs:
       - name: Verify prerequisites
         run: |
           echo "Checking self-hosted runner prerequisites..."
+          echo "Runner: $RUNNER_NAME"
+          echo "PATH: $PATH"
 
-          # Try to find and use node (check file existence directly)
+          # Debug: Check common locations
+          echo "Checking for node..."
+          ls -la /opt/homebrew/bin/node 2>&1 || echo "Not at /opt/homebrew/bin/node"
+          ls -la /usr/local/bin/node 2>&1 || echo "Not at /usr/local/bin/node"
+          which node 2>&1 || echo "which node failed"
+
+          # Try to find and use node
           if [ -x /opt/homebrew/bin/node ]; then
             NODE_CMD=/opt/homebrew/bin/node
-          elif command -v node >/dev/null 2>&1; then
-            NODE_CMD=node
+          elif [ -x /usr/local/bin/node ]; then
+            NODE_CMD=/usr/local/bin/node
+          elif which node >/dev/null 2>&1; then
+            NODE_CMD=$(which node)
           else
-            echo "Node.js is required but not installed."
+            echo "❌ Node.js is required but not installed in any expected location."
+            echo "Runner $RUNNER_NAME does not have Node.js available."
             exit 1
           fi
-          echo "Node.js: $($NODE_CMD --version)"
+          echo "✓ Node.js: $($NODE_CMD --version)"
 
-          # Try to find and use jq (check file existence directly)
+          # Try to find and use jq
           if [ -x /opt/homebrew/bin/jq ]; then
             JQ_CMD=/opt/homebrew/bin/jq
-          elif command -v jq >/dev/null 2>&1; then
-            JQ_CMD=jq
+          elif [ -x /usr/local/bin/jq ]; then
+            JQ_CMD=/usr/local/bin/jq
+          elif which jq >/dev/null 2>&1; then
+            JQ_CMD=$(which jq)
           else
-            echo "jq is required but not installed."
+            echo "❌ jq is required but not installed."
             exit 1
           fi
-          echo "jq: $($JQ_CMD --version)"
+          echo "✓ jq: $($JQ_CMD --version)"
 
-          openssl version || { echo "openssl is required but not installed."; exit 1; }
-          zip --version || { echo "zip is required but not installed."; exit 1; }
-          echo "All prerequisites satisfied"
+          openssl version || { echo "❌ openssl is required but not installed."; exit 1; }
+          echo "✓ openssl: $(openssl version)"
+
+          zip --version | head -2 || { echo "❌ zip is required but not installed."; exit 1; }
+          echo "✓ zip available"
+
+          echo "✅ All prerequisites satisfied"
 
       - name: Get version from tag or input
         id: version
