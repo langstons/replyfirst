@@ -36,13 +36,29 @@ jobs:
       - name: Verify prerequisites
         run: |
           echo "Checking self-hosted runner prerequisites..."
-          echo "OS: $RUNNER_OS"
-          echo "PATH: $PATH"
-          echo "Contents of /opt/homebrew/bin:"
-          ls -la /opt/homebrew/bin/node /opt/homebrew/bin/jq 2>&1 || true
-          echo "Testing with absolute paths:"
-          /opt/homebrew/bin/node --version || node --version || { echo "Node.js is required but not installed."; exit 1; }
-          /opt/homebrew/bin/jq --version || jq --version || { echo "jq is required but not installed."; exit 1; }
+
+          # Try to find and use node
+          if command -v /opt/homebrew/bin/node >/dev/null 2>&1; then
+            NODE_CMD=/opt/homebrew/bin/node
+          elif command -v node >/dev/null 2>&1; then
+            NODE_CMD=node
+          else
+            echo "Node.js is required but not installed."
+            exit 1
+          fi
+          echo "Node.js: $($NODE_CMD --version)"
+
+          # Try to find and use jq
+          if command -v /opt/homebrew/bin/jq >/dev/null 2>&1; then
+            JQ_CMD=/opt/homebrew/bin/jq
+          elif command -v jq >/dev/null 2>&1; then
+            JQ_CMD=jq
+          else
+            echo "jq is required but not installed."
+            exit 1
+          fi
+          echo "jq: $($JQ_CMD --version)"
+
           openssl version || { echo "openssl is required but not installed."; exit 1; }
           zip --version || { echo "zip is required but not installed."; exit 1; }
           echo "All prerequisites satisfied"
@@ -60,7 +76,13 @@ jobs:
       - name: Update manifest version
         run: |
           VERSION="${{ steps.version.outputs.version }}"
-          jq --arg v "$VERSION" '.version = $v' manifest.json > manifest.tmp && mv manifest.tmp manifest.json
+          # Find jq command
+          if command -v /opt/homebrew/bin/jq >/dev/null 2>&1; then
+            JQ_CMD=/opt/homebrew/bin/jq
+          else
+            JQ_CMD=jq
+          fi
+          $JQ_CMD --arg v "$VERSION" '.version = $v' manifest.json > manifest.tmp && mv manifest.tmp manifest.json
           cat manifest.json | grep version
 
       - name: Create ZIP file (Chrome Web Store version)
@@ -217,6 +239,9 @@ jobs:
     permissions:
       pages: write
       id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Deploy to GitHub Pages
