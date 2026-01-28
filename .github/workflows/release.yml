@@ -23,22 +23,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup PATH for Homebrew
+      - name: Setup environment
         run: |
-          echo "/opt/homebrew/bin" >> $GITHUB_PATH
-          echo "PATH=/opt/homebrew/bin:$PATH" >> $GITHUB_ENV
+          echo "OS: $RUNNER_OS"
+          if [ "$RUNNER_OS" = "macOS" ] || [ -d "/opt/homebrew" ]; then
+            echo "/opt/homebrew/bin" >> $GITHUB_PATH
+            echo "Using Homebrew paths for macOS"
+          fi
 
       - name: Verify prerequisites
         run: |
           echo "Checking self-hosted runner prerequisites..."
-          echo "Current PATH: $PATH"
-          echo "Testing node..."
-          /opt/homebrew/bin/node --version || { echo "Node.js is required but not installed."; exit 1; }
-          echo "Testing jq..."
-          /opt/homebrew/bin/jq --version || { echo "jq is required but not installed."; exit 1; }
-          echo "Testing openssl..."
+          echo "OS: $RUNNER_OS"
+          echo "PATH: $PATH"
+          node --version || { echo "Node.js is required but not installed."; exit 1; }
+          jq --version || { echo "jq is required but not installed."; exit 1; }
           openssl version || { echo "openssl is required but not installed."; exit 1; }
-          echo "Testing zip..."
           zip --version || { echo "zip is required but not installed."; exit 1; }
           echo "All prerequisites satisfied"
 
