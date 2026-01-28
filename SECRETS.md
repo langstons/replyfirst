@@ -31,7 +31,7 @@ MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC...
 
 **How to Add to GitHub:**
 
-1. Navigate to: https://github.com/langstons/replyfirst/settings/secrets/actions
+1. Navigate to: https://github.com/privatelinkio/replyfirst/settings/secrets/actions
 2. Click "New repository secret"
 3. Name: `CRX_PRIVATE_KEY`
 4. Value: Paste the **entire** contents of `replyfirst.pem` (including BEGIN/END lines)

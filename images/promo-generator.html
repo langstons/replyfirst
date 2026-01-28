@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReplyFirst Promo Image Generator</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .canvas-container {
+            margin: 20px 0;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        canvas {
+            border: 1px solid #ddd;
+            display: block;
+            margin: 10px 0;
+        }
+        button {
+            background: #8B5CF6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #7C3AED;
+        }
+        h2 {
+            color: #333;
+            margin-top: 0;
+        }
+        .info {
+            color: #666;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>ReplyFirst Chrome Web Store Promotional Images</h1>
+
+    <div class="canvas-container">
+        <h2>1. Small Promo Tile (440x280px)</h2>
+        <canvas id="smallPromo" width="440" height="280"></canvas>
+        <button onclick="downloadCanvas('smallPromo', 'promo-small-440x280.png')">Download</button>
+    </div>
+
+    <div class="canvas-container">
+        <h2>2. Marquee Promo Tile (1400x560px)</h2>
+        <canvas id="marqueePromo" width="1400" height="560"></canvas>
+        <button onclick="downloadCanvas('marqueePromo', 'promo-marquee-1400x560.png')">Download</button>
+    </div>
+
+    <div class="canvas-container">
+        <h2>3. Screenshot 2 - Popup Interface (1280x800px)</h2>
+        <canvas id="screenshot2" width="1280" height="800"></canvas>
+        <button onclick="downloadCanvas('screenshot2', 'screenshot-2-popup-1280x800.png')">Download</button>
+    </div>
+
+    <div class="canvas-container">
+        <h2>4. Screenshot 3 - Before State (1280x800px)</h2>
+        <canvas id="screenshot3" width="1280" height="800"></canvas>
+        <button onclick="downloadCanvas('screenshot3', 'screenshot-3-before-1280x800.png')">Download</button>
+    </div>
+
+    <div class="canvas-container">
+        <h2>5. Screenshot 4 - After State (1280x800px)</h2>
+        <canvas id="screenshot4" width="1280" height="800"></canvas>
+        <button onclick="downloadCanvas('screenshot4', 'screenshot-4-after-1280x800.png')">Download</button>
+    </div>
+
+    <script>
+        const brandColor = '#8B5CF6';
+        const brandColorDark = '#7C3AED';
+        const brandColorLight = '#A78BFA';
+
+        // Helper function to draw rounded rectangle
+        function roundRect(ctx, x, y, width, height, radius) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+        }
+
+        // Draw icon-style logo
+        function drawLogo(ctx, x, y, size) {
+            const barWidth = size * 0.6;
+            const barHeight = size * 0.12;
+            const spacing = size * 0.15;
+            const arrowSize = size * 0.25;
+
+            ctx.fillStyle = 'white';
+
+            // Three bars
+            ctx.fillRect(x, y, barWidth, barHeight);
+            ctx.fillRect(x, y + spacing, barWidth, barHeight);
+            ctx.fillRect(x, y + spacing * 2, barWidth, barHeight);
+
+            // Arrow pointing up
+            const arrowX = x + barWidth + size * 0.15;
+            const arrowY = y + size * 0.35;
+
+            ctx.beginPath();
+            ctx.moveTo(arrowX + arrowSize / 2, arrowY);
+            ctx.lineTo(arrowX + arrowSize, arrowY + arrowSize);
+            ctx.lineTo(arrowX + arrowSize * 0.65, arrowY + arrowSize);
+            ctx.lineTo(arrowX + arrowSize * 0.65, arrowY + arrowSize * 1.5);
+            ctx.lineTo(arrowX + arrowSize * 0.35, arrowY + arrowSize * 1.5);
+            ctx.lineTo(arrowX + arrowSize * 0.35, arrowY + arrowSize);
+            ctx.lineTo(arrowX, arrowY + arrowSize);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        // 1. Small Promo Tile
+        function drawSmallPromo() {
+            const canvas = document.getElementById('smallPromo');
+            const ctx = canvas.getContext('2d');
+
+            // Purple gradient background
+            const gradient = ctx.createLinearGradient(0, 0, 440, 280);
+            gradient.addColorStop(0, brandColorDark);
+            gradient.addColorStop(1, brandColor);
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 440, 280);
+
+            // Draw logo
+            drawLogo(ctx, 150, 60, 60);
+
+            // Title
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 42px -apple-system, BlinkMacSystemFont, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('ReplyFirst', 220, 170);
+
+            // Tagline
+            ctx.font = '22px -apple-system, BlinkMacSystemFont, sans-serif';
+            ctx.fillText('Newest Replies First', 220, 210);
+
+            // Subtitle
+            ctx.font = '16px -apple-system, BlinkMacSystemFont, sans-serif';
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+            ctx.fillText('for Gmail', 220, 240);
+        }
+
+        // 2. Marquee Promo Tile
+        function drawMarqueePromo() {
+            const canvas = document.getElementById('marqueePromo');
+            const ctx = canvas.getContext('2d');
+
+            // Purple gradient background
+            const gradient = ctx.createLinearGradient(0, 0, 1400, 560);
+            gradient.addColorStop(0, brandColorDark);
+            gradient.addColorStop(0.5, brandColor);
+            gradient.addColorStop(1, brandColorLight);
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 1400, 560);
+
+            // Left side - Branding
+            drawLogo(ctx, 80, 180, 120);
+
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 72px -apple-system, BlinkMacSystemFont, sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText('ReplyFirst', 80, 360);
+
+            ctx.font = '32px -apple-system, BlinkMacSystemFont, sans-serif';
+            ctx.fillText('See newest replies first in Gmail', 80, 420);
+
+            // Right side - Visual representation
+            const rightX = 750;
+            const emailWidth = 550;
+
+            // Email container
+            ctx.fillStyle = 'white';
+            roundRect(ctx, rightX, 120, emailWidth, 320, 12);
+            ctx.fill();
+
+            // Email header
+            ctx.fillStyle = '#f8f9fa';
+            roundRect(ctx, rightX, 120, emailWidth, 60, 12);
+            ctx.fill();
+            ctx.fillRect(rightX, 168, emailWidth, 12);
+
+            ctx.fillStyle = '#5f6368';
+            ctx.font = 'bold 20px -apple-system, BlinkMacSystemFont, sans-serif';
+            ctx.fillText('Re: Project Update', rightX + 20, 155);
+
+            // Email messages (newest first)
+            const msgColors = ['#e8f5e9', '#fff9c4', '#ffecb3'];
+            const msgLabels = ['Latest Reply ✓', 'Reply 2', 'Original'];
+
+            for (let i = 0; i < 3; i++) {
+                const msgY = 200 + (i * 75);
+                ctx.fillStyle = msgColors[i];
+                roundRect(ctx, rightX + 20, msgY, emailWidth - 40, 60, 8);
+                ctx.fill();
+
+                ctx.fillStyle = '#333';
+                ctx.font = 'bold 18px -apple-system, BlinkMacSystemFont, sans-serif';
+                ctx.fillText(msgLabels[i], rightX + 35, msgY + 25);
+
+                ctx.font = '14px -apple-system, BlinkMacSystemFont, sans-serif';
+                ctx.fillStyle = '#666';
+                ctx.fillText('Message content preview...', rightX + 35, msgY + 48);
+            }
+
+            // Arrow indicator
+            ctx.fillStyle = brandColor;
+            ctx.font = 'bold 48px -apple-system, BlinkMacSystemFont, sans-serif';
+            ctx.fillText('↑', rightX - 60, 280);
+
+            // Bottom tagline
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 28px -apple-system, BlinkMacSystemFont, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('Never scroll to find the latest message', 700, 510);
+        }
+
+        // 3. Screenshot 2 - Popup Interface
+        function drawScreenshot2() {
+            const canvas = document.getElementById('screenshot2');
+            const ctx = canvas.getContext('2d');
+
+            // Background
+            ctx.fillStyle = '#f5f5f5';
+            ctx.fillRect(0, 0, 1280, 800);
+
+            // Center popup
+            const popupX = 440;
+            const popupY = 200;
+            const popupW = 400;
+            const popupH = 400;
+
+            // Shadow
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
+            roundRect(ctx, popupX + 5, popupY + 5, popupW, popupH, 12);
+            ctx.fill();
+
+            // Popup background
+            ctx.fillStyle = 'white';
+            roundRect(ctx, popupX, popupY, popupW, popupH, 12);
+            ctx.fill();
+
+            // Header
+            const gradient = ctx.createLinearGradient(popupX, popupY, popupX, popupY + 80);
+            gradient.addColorStop(0, brandColor);
+            gradient.addColorStop(1, brandColorDark);
+            ctx.fillStyle = gradient;
+            roundRect(ctx, popupX, popupY, popupW, 80, 12);
+            ctx.fill();
+            ctx.fillRect(popupX, popupY + 68, popupW, 12);
+
+            // Logo in header
+            drawLogo(ctx, popupX + 30, popupY + 25, 35);
+
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 32px -apple-system, BlinkMacSystemFont, sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText('ReplyFirst', popupX + 100, popupY + 55);
+
+            // Status section
+            ctx.fillStyle = '#333';
+            ctx.font = 'bold 24px -apple-system, BlinkMacSystemFont, sans-serif';
+            ctx.fillText('Status', popupX + 30, popupY + 140);
+
+            // Toggle switch
+            const toggleX = popupX + 300;
+            const toggleY = popupY + 160;
+            ctx.fillStyle = brandColor;
+            roundRect(ctx, toggleX, toggleY, 70, 40, 20);
+            ctx.fill();
+
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            ctx.arc(toggleX + 50, toggleY + 20, 16, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = '#333';
+            ctx.font = '20px -apple-system, BlinkMacSystemFont, sans-serif';
+            ctx.fillText('Active', popupX + 30, popupY + 185);
+
+            // Instructions
+            ctx.fillStyle = '#666';
+            ctx.font = '18px -apple-system, BlinkMacSystemFont, sans-serif';
+            ctx.fillText('How it works:', popupX + 30, popupY + 240);
+
+            const instructions = [
+                '• Open any Gmail conversation',
+                '• Messages will auto-reverse',
+                '• Newest replies appear first',
+                '• Toggle to disable anytime'
+            ];
+
+            ctx.font = '16px -apple-system, BlinkMacSystemFont, sans-serif';
+            instructions.forEach((text, i) => {
+                ctx.fillText(text, popupX + 40, popupY + 280 + (i * 30));
+            });
+
+            // Annotation
+            ctx.strokeStyle = brandColor;
+            ctx.lineWidth = 3;
+            ctx.setLineDash([8, 5]);
+            roundRect(ctx, popupX + 20, popupY + 120, 360, 90, 8);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.fillStyle = brandColor;
+            ctx.font = 'bold 20px -apple-system, BlinkMacSystemFont, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('Simple Toggle Control', 640, 160);
+
+            // Arrow
+            ctx.strokeStyle = brandColor;
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(640, 180);
+            ctx.lineTo(640, 240);
+            ctx.stroke();
+
+            ctx.fillStyle = brandColor;
+            ctx.beginPath();
+            ctx.moveTo(640, 240);
+            ctx.lineTo(630, 225);
+            ctx.lineTo(650, 225);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        // 4. Screenshot 3 - Before State
+        function drawScreenshot3() {
+            const canvas = document.getElementById('screenshot3');
+            const ctx = canvas.getContext('2d');
+
+            // Gmail-style background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, 1280, 800);
+
+            // Gmail header
+            ctx.fillStyle = '#f8f9fa';
+            ctx.fillRect(0, 0, 1280, 80);
+
+            ctx.fillStyle = '#5f6368';
+            ctx.font = 'bold 28px -apple-system, BlinkMacSystemFont, sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText('Gmail Conversation', 40, 50);
+
+            // Email messages (oldest first - the problem)
+            const emailX = 200;
+            const emailW = 880;
+            const msgData = [
+                { label: 'Original Email', time: '3 days ago', color: '#e8eaed' },
+                { label: 'Reply 1', time: '2 days ago', color: '#e8eaed' },
+                { label: 'Reply 2', time: '1 day ago', color: '#e8eaed' },
+                { label: 'Latest Reply', time: '2 hours ago', color: '#fff9c4' }
+            ];
+
+            msgData.forEach((msg, i) => {
+                const msgY = 120 + (i * 140);
+
+                // Message container
+                ctx.fillStyle = msg.color;
+                roundRect(ctx, emailX, msgY, emailW, 110, 8);
+                ctx.fill();
+
+                // Message header
+                ctx.fillStyle = '#333';
+                ctx.font = 'bold 20px -apple-system, BlinkMacSystemFont, sans-serif';
+                ctx.fillText(msg.label, emailX + 20, msgY + 35);
+
+                ctx.fillStyle = '#666';
+                ctx.font = '16px -apple-system, BlinkMacSystemFont, sans-serif';
+                ctx.textAlign = 'right';
+                ctx.fillText(msg.time, emailX + emailW - 20, msgY + 35);
+
+                // Message content
+                ctx.textAlign = 'left';
+                ctx.fillStyle = '#5f6368';
+                ctx.font = '16px -apple-system, BlinkMacSystemFont, sans-serif';
+                ctx.fillText('Message content here...', emailX + 20, msgY + 65);
+                ctx.fillText('Lorem ipsum dolor sit amet, consectetur adipiscing...', emailX + 20, msgY + 88);
+            });
+
+            // Problem annotation
+            ctx.strokeStyle = '#d32f2f';
+            ctx.lineWidth = 4;
+            ctx.setLineDash([10, 5]);
+            roundRect(ctx, emailX - 10, 540, emailW + 20, 130, 12);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Problem label
+            ctx.fillStyle = '#d32f2f';
+            ctx.font = 'bold 36px -apple-system, BlinkMacSystemFont, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('Problem: Latest reply at bottom', 640, 730);
+
+            // Scroll indicator
+            ctx.fillStyle = '#d32f2f';
+            ctx.font = 'bold 48px sans-serif';
+            ctx.fillText('↓', 100, 500);
+            ctx.font = '20px -apple-system, BlinkMacSystemFont, sans-serif';
+            ctx.fillText('Must\nscroll', 100, 550);
+        }
+
+        // 5. Screenshot 4 - After State
+        function drawScreenshot4() {
+            const canvas = document.getElementById('screenshot4');
+            const ctx = canvas.getContext('2d');
+
+            // Gmail-style background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, 1280, 800);
+
+            // Gmail header with ReplyFirst indicator
+            ctx.fillStyle = '#f8f9fa';
+            ctx.fillRect(0, 0, 1280, 80);
+
+            ctx.fillStyle = '#5f6368';
+            ctx.font = 'bold 28px -apple-system, BlinkMacSystemFont, sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText('Gmail Conversation', 40, 50);
+
+            // ReplyFirst active indicator
+            ctx.fillStyle = brandColor;
+            roundRect(ctx, 1050, 25, 180, 35, 18);
+            ctx.fill();
+
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 16px -apple-system, BlinkMacSystemFont, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('ReplyFirst Active', 1140, 48);
+
+            // Email messages (newest first - the solution)
+            const emailX = 200;
+            const emailW = 880;
+            const msgData = [
+                { label: 'Latest Reply', time: '2 hours ago', color: '#c7f0c7', highlight: true },
+                { label: 'Reply 2', time: '1 day ago', color: '#e8eaed' },
+                { label: 'Reply 1', time: '2 days ago', color: '#e8eaed' },
+                { label: 'Original Email', time: '3 days ago', color: '#e8eaed' }
+            ];
+
+            msgData.forEach((msg, i) => {
+                const msgY = 120 + (i * 140);
+
+                // Message container
+                ctx.fillStyle = msg.color;
+                roundRect(ctx, emailX, msgY, emailW, 110, 8);
+                ctx.fill();
+
+                // Highlight border for latest
+                if (msg.highlight) {
+                    ctx.strokeStyle = '#4caf50';
+                    ctx.lineWidth = 4;
+                    roundRect(ctx, emailX, msgY, emailW, 110, 8);
+                    ctx.stroke();
+                }
+
+                // Message header
+                ctx.fillStyle = '#333';
+                ctx.font = 'bold 20px -apple-system, BlinkMacSystemFont, sans-serif';
+                ctx.textAlign = 'left';
+                ctx.fillText(msg.label, emailX + 20, msgY + 35);
+
+                // Checkmark for latest
+                if (msg.highlight) {
+                    ctx.fillStyle = '#4caf50';
+                    ctx.font = 'bold 24px sans-serif';
+                    ctx.fillText('✓', emailX + 180, msgY + 35);
+                }
+
+                ctx.fillStyle = '#666';
+                ctx.font = '16px -apple-system, BlinkMacSystemFont, sans-serif';
+                ctx.textAlign = 'right';
+                ctx.fillText(msg.time, emailX + emailW - 20, msgY + 35);
+
+                // Message content
+                ctx.textAlign = 'left';
+                ctx.fillStyle = '#5f6368';
+                ctx.font = '16px -apple-system, BlinkMacSystemFont, sans-serif';
+                ctx.fillText('Message content here...', emailX + 20, msgY + 65);
+                ctx.fillText('Lorem ipsum dolor sit amet, consectetur adipiscing...', emailX + 20, msgY + 88);
+            });
+
+            // Solution annotation
+            ctx.strokeStyle = '#4caf50';
+            ctx.lineWidth = 4;
+            ctx.setLineDash([10, 5]);
+            roundRect(ctx, emailX - 10, 110, emailW + 20, 130, 12);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Solution label
+            ctx.fillStyle = '#4caf50';
+            ctx.font = 'bold 36px -apple-system, BlinkMacSystemFont, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('Solution: Latest reply at top', 640, 710);
+
+            // Feature callouts
+            const features = [
+                { text: 'Instant access', y: 750 },
+                { text: 'No scrolling', y: 750 },
+                { text: 'Auto-reverse', y: 750 }
+            ];
+
+            ctx.font = '18px -apple-system, BlinkMacSystemFont, sans-serif';
+            ctx.fillStyle = brandColor;
+            ctx.fillText('✓ Instant access', 250, 750);
+            ctx.fillText('✓ No scrolling', 520, 750);
+            ctx.fillText('✓ Auto-reverse', 790, 750);
+        }
+
+        // Download function
+        function downloadCanvas(canvasId, filename) {
+            const canvas = document.getElementById(canvasId);
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        // Initialize all canvases
+        window.onload = function() {
+            drawSmallPromo();
+            drawMarqueePromo();
+            drawScreenshot2();
+            drawScreenshot3();
+            drawScreenshot4();
+        };
+    </script>
+</body>
+</html>

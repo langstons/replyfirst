@@ -42,13 +42,13 @@ Copied from `/images/` to `/docs/images/`:
 Choose **ONE** of these options:
 
 #### Option A: GitHub Settings (Recommended - Simpler)
-1. Go to https://github.com/langstons/replyfirst/settings/pages
+1. Go to https://github.com/privatelinkio/replyfirst/settings/pages
 2. Under "Source", select:
    - Branch: `main`
    - Folder: `/docs`
 3. Click "Save"
 4. Wait 2-5 minutes for deployment
-5. Visit: https://langstons.github.io/replyfirst/
+5. Visit: https://privatelinkio.github.io/replyfirst/
 
 #### Option B: GitHub Actions Workflow (Already Configured)
 The workflow file is already in place at `.github/workflows/pages.yml`.
@@ -60,7 +60,7 @@ This will automatically deploy when you push changes to `docs/`.
 
 Once configured, verify the deployment:
 
-1. Visit: https://langstons.github.io/replyfirst/
+1. Visit: https://privatelinkio.github.io/replyfirst/
 2. Check that all sections load properly
 3. Test mobile responsiveness (resize browser)
 4. Verify images load correctly
@@ -156,10 +156,10 @@ GitHub Pages will automatically redeploy within 1-2 minutes.
 
 ## URLs
 
-- **Marketing Site**: https://langstons.github.io/replyfirst/
-- **GitHub Repo**: https://github.com/langstons/replyfirst
-- **Releases**: https://github.com/langstons/replyfirst/releases
-- **Issues**: https://github.com/langstons/replyfirst/issues
+- **Marketing Site**: https://privatelinkio.github.io/replyfirst/
+- **GitHub Repo**: https://github.com/privatelinkio/replyfirst
+- **Releases**: https://github.com/privatelinkio/replyfirst/releases
+- **Issues**: https://github.com/privatelinkio/replyfirst/issues
 
 ## Files Created/Modified
 

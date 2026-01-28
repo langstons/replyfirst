@@ -42,5 +42,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Web-accessible resources for Gmail integration
 - All frames support for Gmail's iframe structure
 
-[Unreleased]: https://github.com/langstons/replyfirst/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/langstons/replyfirst/releases/tag/v1.0.0
+[Unreleased]: https://github.com/privatelinkio/replyfirst/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/privatelinkio/replyfirst/releases/tag/v1.0.0

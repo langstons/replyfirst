@@ -40,7 +40,7 @@ gh release view v1.0.0
 gh workflow run release.yml -f version=1.0.1
 
 # Or use the GitHub UI:
-# https://github.com/langstons/replyfirst/actions/workflows/release.yml
+# https://github.com/privatelinkio/replyfirst/actions/workflows/release.yml
 ```
 
 ## Development
@@ -63,10 +63,10 @@ cd /Users/brent.langston/git/replyfirst
 
 ```bash
 # View repository
-gh repo view langstons/replyfirst
+gh repo view privatelinkio/replyfirst
 
 # Open in browser
-gh repo view langstons/replyfirst --web
+gh repo view privatelinkio/replyfirst --web
 
 # View issues
 gh issue list
@@ -107,20 +107,20 @@ gh secret list
 gh secret set CRX_PRIVATE_KEY < replyfirst.pem
 
 # View secrets in browser
-open https://github.com/langstons/replyfirst/settings/secrets/actions
+open https://github.com/privatelinkio/replyfirst/settings/secrets/actions
 ```
 
 ## GitHub Pages
 
 ```bash
 # Check Pages status
-gh api repos/langstons/replyfirst/pages
+gh api repos/privatelinkio/replyfirst/pages
 
 # View updates.xml
-curl https://langstons.github.io/replyfirst/updates.xml
+curl https://privatelinkio.github.io/replyfirst/updates.xml
 
 # Open Pages settings
-open https://github.com/langstons/replyfirst/settings/pages
+open https://github.com/privatelinkio/replyfirst/settings/pages
 ```
 
 ## Testing Releases
@@ -217,25 +217,25 @@ open https://mail.google.com
 
 ```bash
 # Open repository
-open https://github.com/langstons/replyfirst
+open https://github.com/privatelinkio/replyfirst
 
 # Open Actions
-open https://github.com/langstons/replyfirst/actions
+open https://github.com/privatelinkio/replyfirst/actions
 
 # Open Releases
-open https://github.com/langstons/replyfirst/releases
+open https://github.com/privatelinkio/replyfirst/releases
 
 # Open Settings
-open https://github.com/langstons/replyfirst/settings
+open https://github.com/privatelinkio/replyfirst/settings
 
 # Open Secrets
-open https://github.com/langstons/replyfirst/settings/secrets/actions
+open https://github.com/privatelinkio/replyfirst/settings/secrets/actions
 
 # Open Pages
-open https://github.com/langstons/replyfirst/settings/pages
+open https://github.com/privatelinkio/replyfirst/settings/pages
 
 # View updates.xml
-open https://langstons.github.io/replyfirst/updates.xml
+open https://privatelinkio.github.io/replyfirst/updates.xml
 ```
 
 ## Documentation
@@ -298,7 +298,7 @@ watch -n 30 'gh release list'
 watch -n 10 'gh run list --limit 5'
 
 # Check GitHub Pages deployment
-watch -n 30 'curl -s https://langstons.github.io/replyfirst/updates.xml | grep version'
+watch -n 30 'curl -s https://privatelinkio.github.io/replyfirst/updates.xml | grep version'
 ```
 
 ## Cleanup

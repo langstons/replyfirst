@@ -4,14 +4,14 @@
 
 The ReplyFirst Chrome extension repository has been successfully created and configured:
 
-**Repository URL:** https://github.com/langstons/replyfirst
+**Repository URL:** https://github.com/privatelinkio/replyfirst
 
-**GitHub Pages URL (after first release):** https://langstons.github.io/replyfirst/
+**GitHub Pages URL (after first release):** https://privatelinkio.github.io/replyfirst/
 
 ## What's Been Done
 
 1. ✅ Git repository initialized and committed
-2. ✅ GitHub repository created: `langstons/replyfirst`
+2. ✅ GitHub repository created: `privatelinkio/replyfirst`
 3. ✅ Initial commit pushed to main branch
 4. ✅ GitHub Actions workflow configured (`.github/workflows/release.yml`)
 5. ✅ Documentation created (README.md, RELEASE.md, SECRETS.md, CHANGELOG.md)
@@ -43,7 +43,7 @@ cat replyfirst.pem
 
 Add the private key to GitHub repository secrets:
 
-1. Go to: https://github.com/langstons/replyfirst/settings/secrets/actions
+1. Go to: https://github.com/privatelinkio/replyfirst/settings/secrets/actions
 2. Click "New repository secret"
 3. Name: `CRX_PRIVATE_KEY`
 4. Value: Paste the **entire** output from `cat replyfirst.pem` (including BEGIN/END lines)
@@ -59,7 +59,7 @@ Add the private key to GitHub repository secrets:
 
 Configure GitHub Pages for the updates.xml manifest:
 
-1. Go to: https://github.com/langstons/replyfirst/settings/pages
+1. Go to: https://github.com/privatelinkio/replyfirst/settings/pages
 2. Under "Build and deployment":
    - Source: "GitHub Actions"
 3. Save the settings
@@ -82,7 +82,7 @@ npm install -g crx
 ```
 
 **Runner Setup (if needed):**
-1. Go to: https://github.com/langstons/replyfirst/settings/actions/runners
+1. Go to: https://github.com/privatelinkio/replyfirst/settings/actions/runners
 2. Click "New self-hosted runner"
 3. Follow the installation instructions for your platform
 4. Start the runner service
@@ -109,14 +109,14 @@ git push origin v1.0.0
 7. Deploys `updates.xml` to GitHub Pages
 
 **Monitor the build:**
-- GitHub Actions: https://github.com/langstons/replyfirst/actions
+- GitHub Actions: https://github.com/privatelinkio/replyfirst/actions
 
 ### 6. Verify the Release
 
 After the workflow completes:
 
 1. **Check the release:**
-   - Go to: https://github.com/langstons/replyfirst/releases
+   - Go to: https://github.com/privatelinkio/replyfirst/releases
    - Verify both ZIP and CRX files are attached
    - Note the Extension ID in the release notes
 
@@ -133,7 +133,7 @@ After the workflow completes:
    ```
 
 3. **Verify GitHub Pages:**
-   - Check: https://langstons.github.io/replyfirst/updates.xml
+   - Check: https://privatelinkio.github.io/replyfirst/updates.xml
    - Should contain extension ID and CRX download URL
 
 ## Optional: Chrome Web Store Submission
@@ -250,14 +250,14 @@ sudo apt-get install jq openssl zip
 ### CRX Not Building
 
 Check that `CRX_PRIVATE_KEY` secret is configured:
-1. Go to: https://github.com/langstons/replyfirst/settings/secrets/actions
+1. Go to: https://github.com/privatelinkio/replyfirst/settings/secrets/actions
 2. Verify `CRX_PRIVATE_KEY` exists
 3. If missing, add it following step 2 above
 
 ### GitHub Pages 404 Error
 
 After first release, wait a few minutes for Pages to deploy:
-- Check: https://github.com/langstons/replyfirst/settings/pages
+- Check: https://github.com/privatelinkio/replyfirst/settings/pages
 - Verify "Your site is live at" message appears
 - May take 5-10 minutes after first deployment
 
@@ -277,16 +277,16 @@ git tag v1.0.1
 git push origin v1.0.1
 
 # View workflow runs
-gh run list --repo langstons/replyfirst
+gh run list --repo privatelinkio/replyfirst
 
 # Watch a workflow run
-gh run watch --repo langstons/replyfirst
+gh run watch --repo privatelinkio/replyfirst
 
 # View releases
-gh release list --repo langstons/replyfirst
+gh release list --repo privatelinkio/replyfirst
 
 # Download release artifacts
-gh release download v1.0.0 --repo langstons/replyfirst
+gh release download v1.0.0 --repo privatelinkio/replyfirst
 
 # Generate private key
 openssl genrsa -out replyfirst.pem 2048
@@ -300,11 +300,11 @@ open chrome://extensions
 
 ## Support and Resources
 
-- **Repository:** https://github.com/langstons/replyfirst
-- **Issues:** https://github.com/langstons/replyfirst/issues
-- **Actions:** https://github.com/langstons/replyfirst/actions
-- **Releases:** https://github.com/langstons/replyfirst/releases
-- **Pages:** https://langstons.github.io/replyfirst/
+- **Repository:** https://github.com/privatelinkio/replyfirst
+- **Issues:** https://github.com/privatelinkio/replyfirst/issues
+- **Actions:** https://github.com/privatelinkio/replyfirst/actions
+- **Releases:** https://github.com/privatelinkio/replyfirst/releases
+- **Pages:** https://privatelinkio.github.io/replyfirst/
 
 **Documentation:**
 - [RELEASE.md](RELEASE.md) - Detailed release process
@@ -327,4 +327,4 @@ open chrome://extensions
 **Repository successfully created and configured!**
 
 For questions or issues, refer to the documentation files or open an issue at:
-https://github.com/langstons/replyfirst/issues
+https://github.com/privatelinkio/replyfirst/issues

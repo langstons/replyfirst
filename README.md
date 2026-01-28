@@ -44,7 +44,7 @@ ReplyFirst uses CSS flexbox's `flex-direction: column-reverse` property to rever
 *Coming soon* - Install from the Chrome Web Store for automatic updates.
 
 ### Manual Installation (Developer Mode)
-1. Download the latest `replyfirst-VERSION.zip` from [Releases](https://github.com/langstons/replyfirst/releases)
+1. Download the latest `replyfirst-VERSION.zip` from [Releases](https://github.com/privatelinkio/replyfirst/releases)
 2. Extract the ZIP file
 3. Open Chrome and navigate to `chrome://extensions/`
 4. Enable "Developer mode" in the top right
@@ -59,13 +59,13 @@ For enterprise environments, download the `replyfirst-VERSION.crx` file and depl
   "ExtensionSettings": {
     "EXTENSION_ID": {
       "installation_mode": "force_installed",
-      "update_url": "https://langstons.github.io/replyfirst/updates.xml"
+      "update_url": "https://privatelinkio.github.io/replyfirst/updates.xml"
     }
   }
 }
 ```
 
-See the [Release Notes](https://github.com/langstons/replyfirst/releases) for the current extension ID.
+See the [Release Notes](https://github.com/privatelinkio/replyfirst/releases) for the current extension ID.
 
 ## Development
 

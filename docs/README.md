@@ -4,7 +4,7 @@ This directory contains the GitHub Pages marketing website for ReplyFirst.
 
 ## Live Site
 
-Visit: https://langstons.github.io/replyfirst/
+Visit: https://privatelinkio.github.io/replyfirst/
 
 ## Structure
 
@@ -58,7 +58,7 @@ To update the marketing page:
 
 1. Edit `docs/index.html`
 2. Commit and push to the `main` branch
-3. Changes will appear at https://langstons.github.io/replyfirst/ within minutes
+3. Changes will appear at https://privatelinkio.github.io/replyfirst/ within minutes
 
 ## Image Assets
 

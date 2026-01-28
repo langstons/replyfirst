@@ -173,7 +173,7 @@ jobs:
           else
             JQ_CMD=jq
           fi
-          $JQ_CMD '. + {"update_url": "https://langstons.github.io/replyfirst/updates.xml"}' extension/manifest.json > extension/manifest.tmp && mv extension/manifest.tmp extension/manifest.json
+          $JQ_CMD '. + {"update_url": "https://privatelinkio.github.io/replyfirst/updates.xml"}' extension/manifest.json > extension/manifest.tmp && mv extension/manifest.tmp extension/manifest.json
 
           # Create CRX
           crx pack extension -p replyfirst.pem -o "replyfirst-${VERSION}.crx"
@@ -189,7 +189,7 @@ jobs:
         run: |
           VERSION="${{ steps.version.outputs.version }}"
           EXTENSION_ID="${{ steps.crx.outputs.extension_id }}"
-          CRX_URL="https://github.com/langstons/replyfirst/releases/download/v${VERSION}/replyfirst-${VERSION}.crx"
+          CRX_URL="https://github.com/privatelinkio/replyfirst/releases/download/v${VERSION}/replyfirst-${VERSION}.crx"
 
           cat > updates.xml << EOF
           <?xml version='1.0' encoding='UTF-8'?>
@@ -233,12 +233,12 @@ jobs:
 
             **Enterprise Deployment (CRX with Auto-Update)**:
             - Deploy `replyfirst-${{ steps.version.outputs.version }}.crx` via enterprise policy
-            - Auto-updates via: `https://langstons.github.io/replyfirst/updates.xml`
+            - Auto-updates via: `https://privatelinkio.github.io/replyfirst/updates.xml`
             ${{ steps.check_secret.outputs.has_key == 'true' && format('- Extension ID: `{0}`', steps.crx.outputs.extension_id) || '' }}
 
             ### What's New
 
-            See [CHANGELOG.md](https://github.com/langstons/replyfirst/blob/main/CHANGELOG.md) for detailed changes.
+            See [CHANGELOG.md](https://github.com/privatelinkio/replyfirst/blob/main/CHANGELOG.md) for detailed changes.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

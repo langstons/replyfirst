@@ -43,7 +43,7 @@ cat replyfirst.pem
 
 ### Add to GitHub Secrets:
 
-1. Go to: https://github.com/langstons/replyfirst/settings/secrets/actions
+1. Go to: https://github.com/privatelinkio/replyfirst/settings/secrets/actions
 2. Click "New repository secret"
 3. Name: `CRX_PRIVATE_KEY`
 4. Value: Paste the entire contents of `replyfirst.pem`
@@ -78,7 +78,7 @@ The workflow will automatically:
 
 Trigger a release manually from GitHub Actions:
 
-1. Go to: https://github.com/langstons/replyfirst/actions/workflows/release.yml
+1. Go to: https://github.com/privatelinkio/replyfirst/actions/workflows/release.yml
 2. Click "Run workflow"
 3. Enter version number (e.g., `1.0.0`)
 4. Click "Run workflow"
@@ -134,7 +134,7 @@ Each release produces the following artifacts:
 - Only built if `CRX_PRIVATE_KEY` secret is configured
 
 ### 3. Updates XML (`updates.xml`)
-- Deployed to GitHub Pages at: https://langstons.github.io/replyfirst/updates.xml
+- Deployed to GitHub Pages at: https://privatelinkio.github.io/replyfirst/updates.xml
 - Contains latest version and CRX download URL
 - Used by Chrome for auto-updating enterprise installations
 - Only deployed if CRX is built
@@ -158,7 +158,7 @@ Deploy the CRX file via Chrome enterprise policies:
   "ExtensionSettings": {
     "EXTENSION_ID_HERE": {
       "installation_mode": "force_installed",
-      "update_url": "https://langstons.github.io/replyfirst/updates.xml"
+      "update_url": "https://privatelinkio.github.io/replyfirst/updates.xml"
     }
   }
 }
@@ -212,7 +212,7 @@ crx --version  # May need: npm install -g crx
 - Verify repository has Pages enabled
 - Check that workflow has `pages: write` permission
 - Ensure `deploy-pages` job runs successfully
-- GitHub Pages URL: https://langstons.github.io/replyfirst/
+- GitHub Pages URL: https://privatelinkio.github.io/replyfirst/
 
 ### Extension ID Changed
 
@@ -226,6 +226,6 @@ If you regenerated the private key, the extension ID will change. This means:
 ## Support
 
 For issues with the release process:
-- Check [GitHub Actions logs](https://github.com/langstons/replyfirst/actions)
+- Check [GitHub Actions logs](https://github.com/privatelinkio/replyfirst/actions)
 - Review workflow file: `.github/workflows/release.yml`
-- Open an issue: https://github.com/langstons/replyfirst/issues
+- Open an issue: https://github.com/privatelinkio/replyfirst/issues

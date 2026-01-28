@@ -6,14 +6,14 @@ This document explains how to configure GitHub Pages to serve the ReplyFirst mar
 
 The ReplyFirst repository uses GitHub Pages for two purposes:
 
-1. **Marketing Website** - Served from `/docs` directory at https://langstons.github.io/replyfirst/
+1. **Marketing Website** - Served from `/docs` directory at https://privatelinkio.github.io/replyfirst/
 2. **Update Manifest** - The `updates.xml` file for enterprise CRX auto-updates
 
 ## Configuration Steps
 
 ### Option 1: Using GitHub Settings (Recommended)
 
-1. Go to your GitHub repository: https://github.com/langstons/replyfirst
+1. Go to your GitHub repository: https://github.com/privatelinkio/replyfirst
 2. Click on **Settings** tab
 3. Scroll down to **Pages** section in the left sidebar
 4. Under **Source**, select:
@@ -50,9 +50,9 @@ The current workflow deploys `updates.xml` to Pages. To also deploy the docs:
 After configuring GitHub Pages:
 
 1. Wait 2-5 minutes for initial deployment
-2. Visit: https://langstons.github.io/replyfirst/
+2. Visit: https://privatelinkio.github.io/replyfirst/
 3. You should see the professional marketing landing page
-4. The `updates.xml` will continue to work at: https://langstons.github.io/replyfirst/updates.xml
+4. The `updates.xml` will continue to work at: https://privatelinkio.github.io/replyfirst/updates.xml
 
 ## Directory Structure
 
@@ -124,7 +124,7 @@ To use a custom domain:
 
 2. Configure DNS records with your domain provider:
    ```
-   CNAME  replyfirst  langstons.github.io
+   CNAME  replyfirst  privatelinkio.github.io
    ```
 
 3. Update settings in GitHub Pages section to use custom domain
@@ -139,4 +139,4 @@ To use a custom domain:
 
 For issues with GitHub Pages configuration:
 - GitHub Pages Documentation: https://docs.github.com/en/pages
-- Repository Issues: https://github.com/langstons/replyfirst/issues
+- Repository Issues: https://github.com/privatelinkio/replyfirst/issues
