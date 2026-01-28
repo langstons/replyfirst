@@ -18,6 +18,8 @@ permissions:
 jobs:
   build:
     runs-on: self-hosted
+    outputs:
+      has_key: ${{ steps.check_secret.outputs.has_key }}
 
     steps:
       - name: Checkout code
