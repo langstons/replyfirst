@@ -31,12 +31,15 @@ jobs:
       - name: Verify prerequisites
         run: |
           echo "Checking self-hosted runner prerequisites..."
-          command -v node >/dev/null 2>&1 || { echo "Node.js is required but not installed."; exit 1; }
-          command -v jq >/dev/null 2>&1 || { echo "jq is required but not installed."; exit 1; }
-          command -v openssl >/dev/null 2>&1 || { echo "openssl is required but not installed."; exit 1; }
-          command -v zip >/dev/null 2>&1 || { echo "zip is required but not installed."; exit 1; }
-          echo "Node.js: $(node --version)"
-          echo "jq: $(jq --version)"
+          echo "Current PATH: $PATH"
+          echo "Testing node..."
+          /opt/homebrew/bin/node --version || { echo "Node.js is required but not installed."; exit 1; }
+          echo "Testing jq..."
+          /opt/homebrew/bin/jq --version || { echo "jq is required but not installed."; exit 1; }
+          echo "Testing openssl..."
+          openssl version || { echo "openssl is required but not installed."; exit 1; }
+          echo "Testing zip..."
+          zip --version || { echo "zip is required but not installed."; exit 1; }
           echo "All prerequisites satisfied"
 
       - name: Get version from tag or input
