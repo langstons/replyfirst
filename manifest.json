@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "__MSG_appName__",
   "short_name": "__MSG_appShortName__",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "__MSG_appDescription__",
   "default_locale": "en",
 
@@ -36,6 +36,8 @@
   "permissions": [
     "storage"
   ],
+
+  "homepage_url": "https://privatelinkio.github.io/replyfirst/",
 
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline'"
