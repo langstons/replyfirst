@@ -214,9 +214,9 @@ jobs:
     needs: build
     runs-on: self-hosted
     if: needs.build.outputs.has_key == 'true'
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
 
     steps:
       - name: Deploy to GitHub Pages
