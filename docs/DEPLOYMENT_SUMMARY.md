@@ -48,7 +48,7 @@ Choose **ONE** of these options:
    - Folder: `/docs`
 3. Click "Save"
 4. Wait 2-5 minutes for deployment
-5. Visit: https://privatelinkio.github.io/replyfirst/
+5. Visit: https://privatelink.io/
 
 #### Option B: GitHub Actions Workflow (Already Configured)
 The workflow file is already in place at `.github/workflows/pages.yml`.
@@ -60,7 +60,7 @@ This will automatically deploy when you push changes to `docs/`.
 
 Once configured, verify the deployment:
 
-1. Visit: https://privatelinkio.github.io/replyfirst/
+1. Visit: https://privatelink.io/
 2. Check that all sections load properly
 3. Test mobile responsiveness (resize browser)
 4. Verify images load correctly
@@ -156,7 +156,7 @@ GitHub Pages will automatically redeploy within 1-2 minutes.
 
 ## URLs
 
-- **Marketing Site**: https://privatelinkio.github.io/replyfirst/
+- **Marketing Site**: https://privatelink.io/
 - **GitHub Repo**: https://github.com/privatelinkio/replyfirst
 - **Releases**: https://github.com/privatelinkio/replyfirst/releases
 - **Issues**: https://github.com/privatelinkio/replyfirst/issues
